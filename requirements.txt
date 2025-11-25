@@ -1,0 +1,42 @@
+# Core
+streamlit
+
+# LangChain (core; no google-specific genai bindings)
+langchain
+langchain-community
+langchain_google_genai
+langchain_core
+
+# File handling & reading PDFs
+python-docx
+PyPDF2
+PyMuPDF
+pdfplumber
+
+
+# Data processing
+pandas
+numpy
+openpyxl
+
+# Google API (keep if you plan to use Drive later; harmless at runtime)
+google-api-python-client
+google-auth
+google-auth-oauthlib
+google-auth-httplib2
+
+# Utilities
+tqdm
+requests
+python-dotenv
+pydantic
+pyyaml
+
+# Pure-Python PDF generator (no system deps)
+fpdf2
+aspose-words-cloud
+
+pdf2image
+pytesseract
+PyPDF2
+python-docx
