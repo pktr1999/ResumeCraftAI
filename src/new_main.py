@@ -1,4 +1,9 @@
 import streamlit as st
+import PIL.Image
+
+if not hasattr(PIL.Image, 'ANTIALIAS'):
+    PIL.Image.ANTIALIAS = PIL.Image.LANCZOS
+
 import os
 import io
 import json
@@ -6,6 +11,7 @@ from .extract_text import extract_text_from_pdf
 from .llm_parser import extract_resume_info
 from .create_docx1 import fill_template
 from .send_email import send_mail_with_files
+# from .create_docx_test import generate_resume_files
 
 
 def run_main(files, email_list, company_choice):
@@ -33,6 +39,8 @@ def run_main(files, email_list, company_choice):
             st.info("🤖 Extracting structured data using LLM...")
             resume_json = extract_resume_info(resume_text)
             # print(resume_json)
+            print('Calling the test function')
+            # generate_resume_files(resume_json)
 
             # Step 3: Choose template
             base_dir = os.path.dirname(os.path.abspath(__file__))
@@ -48,7 +56,7 @@ def run_main(files, email_list, company_choice):
                 output_docx_path = os.path.join(output_docx_dir, f"{filename}_PGI.docx")
                 output_pdf_path = os.path.join(output_pdf_dir, f"{filename}_PGI.pdf")
             else:
-                template_path = os.path.join(data_dir, "template", "MindMap_Template.docx")
+                template_path = os.path.join(data_dir, "template", "MindMap.docx")
                 output_docx_path = os.path.join(output_docx_dir, f"{filename}_Mindmap.docx")
                 output_pdf_path = os.path.join(output_pdf_dir, f"{filename}_Mindmap.pdf")
 
@@ -56,6 +64,7 @@ def run_main(files, email_list, company_choice):
 
             st.info(f"📝 Creating files using template: {os.path.basename(template_path)}")
             fill_template(template_path, output_docx_path, output_pdf_path, resume_json)
+            # generate_resume_files(resume_json)
 
             processed_files.append((output_docx_path, output_pdf_path))
             st.success(f"✅ {filename} processed successfully!")
